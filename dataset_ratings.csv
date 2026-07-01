@@ -1,0 +1,923 @@
+id,code,task,code origin,name,line,H1 score,H1 reason,H1 sub-reason,H2 score,H2 reason,H2 sub-reason,Full prompt score,Full prompt reason,Full prompt sub-reason,H1-H2 disagreement type,H1-Full prompt disagreement type
+54,"def print_chessboard(n): # nakreslí ASCII šachovnici o n délce a šířce
+    if n % 2 == 0:
+        for i in range(n//2):
+            print((n//2) * (""# "" + "". ""))
+            print((n//2) * ("". "" + ""# ""))
+    elif n % 2 == 1:
+        for j in range(n//2):
+            print((n//2) * (""# "" + "". "") + ""#"")
+            print((n//2) * ("". "" + ""# "") + ""."")
+        print((n//2) * (""# "" + "". "") + ""#"")",11,authentic,print_chessboard,1,good,,,good,,,good,,,,
+,,,,n,1,good,,,good,,,good,,,,
+,,,,i,3,good,,,good,,,good,,,,
+,,,,j,7,medium,confusing,inconsistent,medium,confusing,false analogy,medium,confusing,inconsistent,fuzziness of taxonomy,
+90,"def print_primes(n):
+    primes_list = [1]
+    not_prime = 0
+    int_in_n = 1
+    
+    while len(primes_list) != (n + 1):
+        int_in_n += 1
+        #print('number', int_in_n)
+        for prime in primes_list:
+            if (int_in_n % prime) == 0 and prime != int_in_n and prime != 1:
+                #print('not_prime_detected', prime)
+                not_prime += 1
+        #print('p_test', not_prime)
+        if not_prime == 0:
+            primes_list.append(int_in_n)
+            print(int_in_n)
+        not_prime = 0",22,authentic,print_primes,1,good,,,good,,,good,,,,
+,,,,n,1,good,,,good,,,good,,,,
+,,,,primes_list,2,medium,overly informative,including type,good,,,medium,overly informative,including type,oversight H2,
+,,,,not_prime,3,bad,confusing,negated boolean,medium,confusing,negated boolean,bad,confusing,contradicting meaning,personal opinions -- severity,multiple possible sub-reasons
+,,,,int_in_n,4,medium,confusing,contradicting common use,bad,overly informative,including type,bad,uninformative,vague,multiple possible sub-reasons,multiple possible sub-reasons
+,,,,prime,9,good,,,good,,,good,,,,
+94,"def print_primes(n):
+    counter2 = 0
+    i = 1
+    while counter2 < n:   
+        counter = 0
+        for j in range(1,i+1):
+            if i%j==0:
+                counter+=1
+        if counter==2:
+            print(i)
+            counter2+=1
+        i+=1",22,authentic,print_primes,1,good,,,good,,,good,,,,
+,,,,n,1,good,,,good,,,good,,,,
+,,,,counter2,2,bad,uninformative,vague,medium,uninformative,vague,bad,confusing,false analogy,personal opinions -- severity,multiple possible sub-reasons
+,,,,i,3,bad,confusing,contradicting common use,good,,,good,,,personal opinions -- naming standards,personal opinions -- naming standards
+,,,,counter,5,bad,uninformative,vague,medium,uninformative,vague,medium,uninformative,vague,personal opinions -- severity,personal opinions -- severity
+,,,,j,6,bad,confusing,contradicting common use,medium,confusing,false analogy,good,,,fuzziness of taxonomy,fuzziness of taxonomy
+120,"def get_most_common_value(mylist):
+    count_elements = 0
+    for element in mylist:
+        common = mylist.count(element)
+        if common >= count_elements:
+            most_common_numbers = []
+            most_common_numbers.append(element)
+            count_elements = common
+    return min(most_common_numbers)",30,authentic,get_most_common_value,1,good,,,good,,,good,,,,
+,,,,mylist,1,good,,,good,,,medium,uninformative,vague,,personal opinions -- naming standards
+,,,,count_elements,2,bad,confusing,contradicting meaning,medium,uninformative,vague,medium,confusing,not respecting type,fuzziness of taxonomy,fuzziness of taxonomy
+,,,,element,3,good,,,good,,,good,,,,
+,,,,common,4,bad,confusing,contradicting meaning,bad,confusing,contradicting meaning,bad,uninformative,vague,,multiple possible sub-reasons
+,,,,most_common_numbers,6,medium,overly informative,overly specific,medium,overly informative,overly specific,bad,overly informative,including type,,fuzziness of taxonomy
+122,"def get_most_common_value(mylist):
+    count_r = 0
+    result = 0
+    most_common = 0
+    list_of_most_common = []
+    for i in range(len(mylist)):
+        count_r = mylist.count(mylist[i])
+        if count_r == result:
+            list_of_most_common.append(mylist[i])
+        if count_r > result:
+            result = count_r
+            most_common = mylist[i]
+    if len(list_of_most_common) > 1:
+        return min(list_of_most_common)
+    return most_common",30,authentic,get_most_common_value,1,good,,,good,,,good,,,,
+,,,,mylist,1,good,,,good,,,medium,overly informative,including type,,less relevant
+,,,,count_r,2,medium,overly informative,overly specific,bad,uninformative,unnecessary abbreviation,bad,uninformative,unnecessary abbreviation,multiple possible sub-reasons,multiple possible sub-reasons
+,,,,result,3,bad,confusing,contradicting meaning,medium,uninformative,vague,bad,uninformative,vague,multiple possible sub-reasons,multiple possible sub-reasons
+,,,,most_common,4,good,,,good,,,good,,,,
+,,,,list_of_most_common,5,medium,overly informative,overly specific,good,,,medium,overly informative,including type,oversight H2,multiple possible sub-reasons
+,,,,i,6,good,,,good,,,good,,,,
+123,"def get_most_common_value(mylist):
+    counts = {}
+    for i in mylist:
+        cnt = mylist.count(i) 
+        counts[i] = cnt
+    #print(counts)
+    cnts = []
+    for i in range(max(counts)+1):
+        if i in counts:
+            cnt = counts.get(i)
+            #print(i,cnt)
+            cnts.append((i,cnt))
+    cnts.sort(key=lambda x: x[1])
+    #print(cnts)    
+    same = []
+    mx = cnts[-1][1]
+    for i in range(len(cnts)-1,-1,-1):
+        if cnts[i][1] == mx:
+            same.append(cnts[i][0])
+    return min(same)",30,authentic,get_most_common_value,1,good,,,good,,,good,,,,
+,,,,mylist,1,good,,,good,,,medium,uninformative,vague,,personal opinions -- naming standards
+,,,,counts,2,good,,,good,,,good,,,,
+,,,,i,3,bad,confusing,contradicting common use,bad,confusing,contradicting common use,bad,confusing,contradicting common use,,
+,,,,cnt,4,good,,,medium,uninformative,unnecessary abbreviation,bad,uninformative,unnecessary abbreviation,oversight H1,oversight H1
+,,,,cnts,7,bad,uninformative,vague,medium,uninformative,unnecessary abbreviation,bad,uninformative,unnecessary abbreviation,multiple possible sub-reasons,multiple possible sub-reasons
+,,,,x,13,medium,uninformative,single letter arbitrary,medium,uninformative,single letter arbitrary,medium,uninformative,single letter arbitrary,,
+,,,,same,15,medium,uninformative,vague,medium,uninformative,vague,medium,uninformative,vague,,
+,,,,mx,16,bad,uninformative,vague,bad,uninformative,unnecessary abbreviation,bad,uninformative,unnecessary abbreviation,multiple possible sub-reasons,multiple possible sub-reasons
+186,"def print_arrow(n):
+    poc = n-1
+    for radky in range(n):
+        for sloupce in range(n):
+            c = '.'
+            if radky+n//2 == sloupce:
+                c = '*'
+            if radky == n // 2 or sloupce == n + poc-1:       # zde opravit
+                c = '*'
+                poc = poc - 1
+        
+            print(c, end="""")
+        print()",78,authentic,print_arrow,1,good,,,good,,,good,,,,
+,,,,n,1,good,,,good,,,good,,,,
+,,,,poc,2,bad,uninformative,vague,medium,uninformative,unnecessary abbreviation,bad,language,not in English,multiple possible sub-reasons,multiple possible sub-reasons
+,,,,radky,3,medium,confusing,not respecting count,good,,,bad,language,not in English,oversight H2,multiple possible sub-reasons
+,,,,sloupce,4,medium,confusing,not respecting count,good,,,bad,language,not in English,oversight H2,multiple possible sub-reasons
+,,,,c,5,medium,uninformative,single letter systematic,medium,uninformative,single letter systematic,bad,uninformative,single letter arbitrary,,multiple possible sub-reasons
+201,"def printBigX(n):
+    for i in range(n):
+        row= """"
+        for j in range(n):
+            if i == j or i + j == n-1:
+                row += ""#""
+            else:
+                row += "" ""
+        print(row)",88,authentic,printBigX,1,medium,syntactic,breaks naming conventions,medium,syntactic,breaks naming conventions,medium,syntactic,breaks naming conventions,,
+,,,,n,1,bad,uninformative,vague,good,,,good,,,personal opinions -- naming standards,personal opinions -- naming standards
+,,,,i,2,good,,,good,,,good,,,,
+,,,,row,3,good,,,good,,,good,,,,
+,,,,j,4,good,,,good,,,good,,,,
+237,"def get_common_prefix(text1, text2):
+    mensi = min(len(text1), len(text2))
+    prefix = """"
+    for i in range(mensi):
+        if text1[i] == text2[i]:
+            prefix += text1[i]
+        else:
+            break
+    return prefix",109,authentic,get_common_prefix,1,good,,,good,,,good,,,,
+,,,,text1,1,good,,,good,,,medium,uninformative,vague,,less relevant
+,,,,text2,1,good,,,good,,,medium,uninformative,vague,,less relevant
+,,,,mensi,2,medium,confusing,contradicting common use,medium,confusing,contradicting meaning,bad,language,not in English,multiple possible sub-reasons,multiple possible sub-reasons
+,,,,prefix,3,good,,,good,,,good,,,,
+,,,,i,4,good,,,good,,,good,,,,
+257,"def print_column_sums(table):
+    for i in range(len(table[0])):
+        sum = 0
+        for num in table:
+            sum += num[i]
+        print(sum, end=' ')
+    print()",115,authentic,print_column_sums,1,good,,,good,,,good,,,,
+,,,,table,1,good,,,good,,,good,,,,
+,,,,i,2,good,,,good,,,good,,,,
+,,,,sum,3,medium,syntactic,shadowing builtin,bad,syntactic,shadowing builtin,bad,syntactic,shadowing builtin,personal opinions -- severity,personal opinions -- severity
+,,,,num,4,bad,confusing,contradicting meaning,medium,uninformative,unnecessary abbreviation,bad,confusing,contradicting common use,oversight H2,fuzziness of taxonomy
+259,"def print_multiples(n, limit):
+    multiple = n
+    while multiple < limit:
+        print(multiple)
+        multiple += n",117,authentic,print_multiples,1,good,,,good,,,good,,,,
+,,,,n,1,good,,,good,,,good,,,,
+,,,,limit,1,good,,,good,,,good,,,,
+,,,,multiple,2,good,,,good,,,good,,,,
+267,"def count_zeros(n):
+    o = 0
+    while n > 0:
+        if n % 10 == 0:
+            o += 1
+        n = n // 10
+    print(o,)
+",120,authentic,count_zeros,1,good,,,good,,,good,,,,
+,,,,n,1,good,,,good,,,good,,,,
+,,,,o,2,good,,,bad,syntactic,easy to confuse,bad,uninformative,single letter arbitrary,oversight H1,multiple possible sub-reasons
+283,"price = {""luk"": 5, ""srp"": 3, ""kosa"": 8, ""kladivo"": 4, ""cep"": 2, ""pila"": 6}
+
+def get_total_price(tools):
+    celkem = 0
+    a = 0 
+    for i in tools:
+        if i not in price:
+            print (""Nelze nakoupit"")
+            a += 1
+        else:
+            celkem += price[i]
+    if a != 1:
+        print (""Celkem"", celkem)",126,authentic,get_total_price,3,good,,,good,,,good,,,,
+,,,,price,1,medium,confusing,not respecting count,medium,confusing,not respecting count,medium,confusing,not respecting count,,
+,,,,tools,3,good,,,good,,,good,,,,
+,,,,celkem,4,medium,language,not in English,medium,language,not in English,bad,language,not in English,,personal opinions -- severity
+,,,,a,5,bad,uninformative,single letter arbitrary,bad,uninformative,single letter arbitrary,bad,uninformative,single letter arbitrary,,
+,,,,i,6,bad,confusing,contradicting common use,bad,confusing,contradicting common use,bad,confusing,contradicting common use,,
+309,"def print_letter_distances(text):
+    for i in range (len(text)-1):
+        letter = text[i]
+        nextletter = text[i + 1]
+        distanceletter = ord(letter)
+        distancenextletter = ord(nextletter)
+        distance = abs(distanceletter - distancenextletter)
+        print(letter, nextletter, distance, end = """")
+    print()",145,authentic,print_letter_distances,1,good,,,good,,,good,,,,
+,,,,text,1,good,,,good,,,good,,,,
+,,,,i,2,good,,,good,,,good,,,,
+,,,,letter,3,medium,confusing,inconsistent,good,,,good,,,personal opinions -- naming standards,personal opinions -- naming standards
+,,,,nextletter,4,medium,syntactic,breaks naming conventions,medium,syntactic,breaks naming conventions,medium,syntactic,breaks naming conventions,,
+,,,,distanceletter,5,medium,confusing,contradicting meaning,medium,syntactic,breaks naming conventions,bad,confusing,contradicting meaning,multiple possible sub-reasons,personal opinions -- severity
+,,,,distancenextletter,6,medium,confusing,contradicting meaning,medium,syntactic,breaks naming conventions,bad,confusing,contradicting meaning,multiple possible sub-reasons,personal opinions -- severity
+,,,,distance,7,good,,,good,,,good,,,,
+318,"def print_products_table(n):
+    for row in range(1, n+1):
+        for col in range(n):
+            lumn = row*col
+            print(row + lumn, end="" "")
+        print()",36,authentic,print_products_table,1,good,,,good,,,good,,,,
+,,,,n,1,good,,,good,,,good,,,,
+,,,,row,2,good,,,good,,,good,,,,
+,,,,col,3,good,,,good,,,good,,,,
+,,,,lumn,4,bad,uninformative,nonsense,bad,uninformative,nonsense,bad,uninformative,nonsense,,
+331,"def print_letter_frequencies(text):
+    char_count={}
+    text_01=jednoLetter(text)
+    for char in text:
+        if char in char_count:
+            char_count[char]+=1
+        else:
+            char_count[char]=1
+    for x in text_01:
+        print(x,char_count[x])
+    
+def jednoLetter(text):
+    text_01 = """"
+    for k in text:
+        if not(k in text_01):
+            text_01+=k
+    return text_01",124,authentic,print_letter_frequencies,1,good,,,good,,,good,,,,
+,,,,jednoLetter,12,bad,language,not in English,bad,confusing,not respecting type,bad,language,not in English,multiple possible sub-reasons,
+,,,,text,1,good,,,good,,,good,,,,
+,,,,char_count,2,medium,confusing,not respecting count,medium,confusing,not respecting count,medium,confusing,not respecting count,,
+,,,,text_01,3,bad,uninformative,nonsense,bad,uninformative,vague,bad,uninformative,vague,multiple possible sub-reasons,multiple possible sub-reasons
+,,,,char,4,good,,,good,,,good,,,,
+,,,,x,9,bad,uninformative,single letter arbitrary,bad,uninformative,single letter arbitrary,bad,uninformative,single letter arbitrary,,
+,,,,text,12,good,,,good,,,good,,,,
+,,,,text_01,13,bad,uninformative,nonsense,bad,uninformative,vague,bad,uninformative,vague,multiple possible sub-reasons,multiple possible sub-reasons
+,,,,k,14,bad,confusing,contradicting common use,bad,confusing,contradicting common use,bad,uninformative,single letter arbitrary,,less relevant
+332,"from collections import OrderedDict
+
+def print_letter_frequencies(text):
+    f = OrderedDict()
+    for letter in text:
+        if not letter in f:
+            f[letter] = 1
+        else:
+            count = f[letter]
+            f[letter] = count + 1
+    for key, value in f.items():
+        print(key, value)",124,authentic,print_letter_frequencies,3,good,,,good,,,good,,,,
+,,,,text,3,good,,,good,,,good,,,,
+,,,,f,4,bad,uninformative,single letter systematic,medium,uninformative,single letter systematic,bad,uninformative,single letter arbitrary,personal opinions -- severity,multiple possible sub-reasons
+,,,,letter,5,good,,,good,,,good,,,,
+,,,,count,9,good,,,good,,,good,,,,
+,,,,key,11,medium,uninformative,vague,good,,,medium,uninformative,vague,personal opinions -- naming standards,
+,,,,value,11,medium,uninformative,vague,good,,,medium,uninformative,vague,personal opinions -- naming standards,
+335,"def print_powers(base, n):
+    pom = 1
+    pom2 = base
+    while pom <= n:
+        print(base)
+        base = base * pom2
+        pom += 1",21,authentic,print_powers,1,good,,,good,,,good,,,,
+,,,,base,1,good,,,good,,,bad,confusing,contradicting meaning,,oversight H1
+,,,,n,1,good,,,medium,uninformative,vague,good,,,personal opinions -- naming standards,
+,,,,pom,2,bad,uninformative,vague,medium,uninformative,vague,bad,uninformative,nonsense,personal opinions -- severity,less relevant
+,,,,pom2,3,bad,confusing,false analogy,bad,confusing,false analogy,bad,confusing,false analogy,,
+339,"def print_every_second_number(num_list):
+    count = 0
+    for num in num_list:
+        if count % 2 == 0:
+            print(num)
+        count += 1",15,authentic,print_every_second_number,1,good,,,good,,,good,,,,
+,,,,num_list,1,medium,overly informative,including type,good,,,medium,overly informative,including type,oversight H2,
+,,,,count,2,medium,confusing,contradicting common use,bad,confusing,contradicting meaning,medium,confusing,contradicting common use,fuzziness of taxonomy,
+,,,,num,3,good,,,medium,uninformative,unnecessary abbreviation,good,,,fuzziness of taxonomy,
+352,"def zip_strings(text1, text2):
+    tmp = """"
+    minimum = min(len(text1), len(text2))
+    maximum = max(len(text1), len(text2))
+    biger = text1 if len(text1) > minimum else text2
+    for i in range(minimum):
+        tmp +=text1[i]
+        tmp +=text2[i]
+    for i in range(minimum, maximum):
+        tmp += biger[i]
+    return tmp",28,authentic,zip_strings,1,good,,,good,,,good,,,,
+,,,,text1,1,good,,,good,,,good,,,,
+,,,,text2,1,good,,,good,,,good,,,,
+,,,,tmp,2,bad,uninformative,vague,bad,uninformative,vague,medium,uninformative,vague,,personal opinions -- severity
+,,,,minimum,3,medium,uninformative,vague,good,,,good,,,personal opinions -- naming standards,personal opinions -- naming standards
+,,,,maximum,4,medium,uninformative,vague,good,,,good,,,personal opinions -- naming standards,personal opinions -- naming standards
+,,,,biger,5,medium,language,misspelled,medium,language,misspelled,bad,language,misspelled,,personal opinions -- severity
+,,,,i,6,good,,,good,,,good,,,,
+165,"def print_big_five(n):
+    for i in range(1):
+        print('#' * n)
+        for i in range(2, n):
+            print('#')
+    for i in range(1):
+        print('#'* n)
+        for i in range(2, n):
+            print(' ' * 2, '#')
+    for i in range(1):
+        print('#'* n)",68,authentic,print_big_five,1,good,,,good,,,good,,,,
+,,,,n,1,bad,uninformative,vague,good,,,good,,,personal opinions -- naming standards,personal opinions -- naming standards
+,,,,i,2,medium,syntactic,shadowing other,medium,syntactic,shadowing other,bad,syntactic,shadowing other,,personal opinions -- severity
+358,"price = {""luk"": 5, ""srp"": 3, ""kosa"": 8, ""kladivo"": 4, ""cep"": 2, ""pila"": 6}
+
+def get_total_price(tools):
+    total_price = 0
+    not_occure = 0
+    for i in tools:
+        if i not in price:
+            not_occure += 1
+    if not_occure > 0:
+        print(""Nelze nakoupit"")
+    else:
+        for j in tools:
+            total_price += price[j]
+        print(""Celkem"", total_price)",126,authentic,get_total_price,3,good,,,good,,,medium,confusing,contradicting meaning,,oversight H1
+,,,,price,1,medium,confusing,not respecting count,medium,confusing,not respecting count,medium,confusing,not respecting count,,
+,,,,tools,3,good,,,good,,,good,,,,
+,,,,total_price,4,good,,,good,,,good,,,,
+,,,,not_occure,5,bad,confusing,negated boolean,medium,uninformative,unnecessary abbreviation,bad,language,misspelled,multiple possible sub-reasons,multiple possible sub-reasons
+,,,,i,6,bad,confusing,contradicting common use,bad,confusing,contradicting common use,bad,confusing,contradicting common use,,
+,,,,j,12,bad,confusing,contradicting common use,bad,confusing,contradicting common use,bad,confusing,contradicting common use,,
+360,"def get_first_letters(text):
+    l = []
+    for x in text.split("" ""):
+        if x != """":
+            l.append(x[0])
+    print("" "".join(l))",27,authentic,get_first_letters,1,good,,,good,,,good,,,,
+,,,,text,1,good,,,good,,,good,,,,
+,,,,l,2,medium,syntactic,easy to confuse,bad,syntactic,easy to confuse,bad,syntactic,easy to confuse,personal opinions -- severity,personal opinions -- severity
+,,,,x,3,bad,uninformative,single letter arbitrary,bad,uninformative,single letter arbitrary,medium,uninformative,single letter arbitrary,,personal opinions -- severity
+371,"def print_naturals(n):
+    I = 1
+    while I <= n:
+        print(I)
+        I = I + 1",1,authentic,print_naturals,1,good,,,good,,,good,,,,
+,,,,n,1,good,,,good,,,good,,,,
+,,,,I,2,bad,syntactic,easy to confuse,bad,syntactic,easy to confuse,bad,syntactic,easy to confuse,,
+362,"def print_fibbonacci_sequence(n):
+    previous = 0
+    current  = 1
+    print(1)
+    for i in range(n-1):
+       
+        summ = previous + current 
+        previous = current 
+        current = summ
+       
+        
+       
+        print(summ)",2,manual typo,print_fibbonacci_sequence,1,medium,language,misspelled,good,,,bad,language,misspelled,oversight H2,personal opinions -- severity
+,,,,n,1,good,,,good,,,good,,,,
+,,,,previous,2,good,,,good,,,good,,,,
+,,,,current,3,good,,,good,,,good,,,,
+,,,,i,5,good,,,medium,syntactic,breaks naming conventions,good,,,oversight H1,
+,,,,summ,7,bad,confusing,inconsistent,medium,uninformative,unnecessary abbreviation,bad,language,misspelled,fuzziness of taxonomy,less relevant
+17,"def print_alphabet(n):
+    abeceda = ""ABCDEFGHIJKLMNOPQRSTUVWXYZ""
+    opakovat = n // 26
+    zbytek = n % 26
+    for k in range(opakovat):
+        for i in range(26):
+            print(abeceda[i])
+    for i in range(zbytek):
+        print(abeceda[i])",4,authentic,print_alphabet,1,good,,,good,,,good,,,,
+,,,,n,1,good,,,good,,,good,,,,
+,,,,abeceda,2,medium,language,not in English,medium,language,not in English,bad,language,not in English,,personal opinions -- severity
+,,,,opakovat,3,medium,language,not in English,medium,language,not in English,bad,language,not in English,,personal opinions -- severity
+,,,,zbytek,4,medium,language,not in English,medium,language,not in English,bad,language,not in English,,personal opinions -- severity
+,,,,k,5,good,,,medium,syntactic,breaks naming conventions,bad,syntactic,breaks naming conventions,oversight H1,oversight H1
+,,,,i,6,good,,,good,,,good,,,,
+368,"def print_alphabet(n):
+    result = ""ABCDEFGHIJKLMNOPQRSTUVWXYZ"" * (n // 26 + 1)
+    for l in result[:n]:
+        print(l)",4,authentic,print_alphabet,1,good,,,good,,,good,,,,
+,,,,n,1,good,,,good,,,good,,,,
+,,,,result,2,medium,confusing,contradicting meaning,medium,confusing,contradicting meaning,medium,uninformative,vague,,less relevant
+,,,,l,3,bad,syntactic,easy to confuse,bad,syntactic,easy to confuse,bad,syntactic,easy to confuse,,
+375,"def pyramid(n): 
+    k=1 
+    for i in range(n): 
+        for a in range(n): 
+            print("" "",end="" "") 
+        for k in range(k): 
+            print(""#"", end="" "") 
+        print()     
+        k+=3 
+        n-=1",10,authentic,print_pyramid,1,good,,,good,,,good,,,,
+,,,,n,1,good,,,good,,,good,,,,
+,,,,k,2,bad,syntactic,shadowing other,medium,uninformative,single letter arbitrary,bad,syntactic,shadowing other,multiple possible sub-reasons,
+,,,,i,3,good,,,good,,,good,,,,
+,,,,a,4,bad,uninformative,single letter arbitrary,bad,uninformative,single letter arbitrary,bad,syntactic,breaks naming conventions,,oversight H1
+59,"def print_string_intersection(left, right):
+    leftLen=len(left)
+    rightLen=len(right)
+    if rightLen>leftLen:
+        rangex=leftLen
+    else:
+        rangex=rightLen
+    for i in range(rangex):
+        if left[i]==right[i]:
+            print (left[i])",13,authentic,print_string_intersection,1,good,,,good,,,bad,confusing,contradicting common use,,personal opinions -- naming standards
+,,,,left,1,good,,,medium,uninformative,vague,good,,,personal opinions -- naming standards,
+,,,,right,1,good,,,medium,uninformative,vague,good,,,personal opinions -- naming standards,
+,,,,leftLen,2,medium,syntactic,breaks naming conventions,bad,syntactic,breaks naming conventions,medium,syntactic,breaks naming conventions,personal opinions -- severity,
+,,,,rightLen,3,medium,syntactic,breaks naming conventions,bad,syntactic,breaks naming conventions,medium,syntactic,breaks naming conventions,personal opinions -- severity,
+,,,,rangex,5,bad,confusing,contradicting meaning,bad,uninformative,unnecessary abbreviation,bad,uninformative,vague,fuzziness of taxonomy,multiple possible sub-reasons
+,,,,i,8,good,,,good,,,good,,,,
+347,"def print_every_second_number(list):
+    j = 0
+    for i in list:
+        if j % 2 ==0:
+            print(i)
+        j += 1",15,authentic,print_every_second_number,1,good,,,good,,,medium,overly informative,including type,,less relevant
+,,,,list,1,medium,syntactic,shadowing builtin,bad,syntactic,shadowing builtin,bad,syntactic,shadowing builtin,personal opinions -- severity,personal opinions -- severity
+,,,,j,2,medium,confusing,contradicting common use,good,,,medium,uninformative,single letter arbitrary,fuzziness of taxonomy,less relevant
+,,,,i,3,bad,confusing,contradicting common use,bad,confusing,contradicting common use,bad,confusing,contradicting common use,,
+91,"def print_primes(n):
+    num1 = 2
+    non_prime_list = []
+
+    while True:
+        not_prime = False
+        for i in range(2, 9):
+            if num1 % i == 0 and int(num1 / i) != 1:
+                not_prime = True
+            if not_prime:
+                break
+            for o in non_prime_list:
+                if num1 % o == 0:
+                    not_prime = True
+            if not_prime:
+                break
+            if i == 8:
+                print(num1)
+                non_prime_list.append(num1)
+
+        num1 += 1
+        if len(non_prime_list) >= n:
+            break
+",22,authentic,print_primes,1,good,,,good,,,good,,,,
+,,,,n,1,good,,,good,,,good,,,,
+,,,,num1,2,medium,overly informative,overly specific,medium,uninformative,vague,bad,uninformative,vague,multiple possible sub-reasons,multiple possible sub-reasons
+,,,,non_prime_list,3,medium,overly informative,including type,bad,confusing,contradicting meaning,bad,confusing,contradicting meaning,oversight H1,oversight H1
+,,,,not_prime,6,medium,confusing,negated boolean,bad,confusing,negated boolean,bad,confusing,negated boolean,personal opinions -- severity,personal opinions -- severity
+,,,,i,7,good,,,good,,,good,,,,
+,,,,o,12,bad,uninformative,single letter arbitrary,bad,uninformative,single letter arbitrary,bad,uninformative,single letter arbitrary,,
+372,"def count(k):
+    count = 0
+    for i in range(1,k+1):
+        if k % i == 0:
+            count += 1
+    return count
+
+
+def print_primes(n):
+    prime = 0
+    i = 1
+    while prime < n:
+        if count(i) == 2:
+            prime += 1
+            print(i)
+        i += 1",22,authentic,count,1,medium,uninformative,vague,bad,uninformative,vague,medium,uninformative,vague,personal opinions -- severity,
+,,,,print_primes,9,good,,,good,,,good,,,,
+,,,,k,1,medium,confusing,inconsistent,good,,,medium,uninformative,single letter arbitrary,oversight H2,multiple possible sub-reasons
+,,,,count,2,bad,syntactic,shadowing other,bad,syntactic,shadowing other,bad,syntactic,shadowing other,,
+,,,,i,3,good,,,good,,,good,,,,
+,,,,n,9,good,,,good,,,good,,,,
+,,,,prime,10,bad,confusing,contradicting meaning,bad,confusing,contradicting meaning,bad,confusing,contradicting meaning,,
+,,,,i,11,medium,confusing,inconsistent,good,,,good,,,personal opinions -- naming standards,personal opinions -- naming standards
+89,"def print_primes(n):
+    number = 2
+    primes_count = 0
+    while primes_count < n:
+        if prime(number):
+            print(number)
+            primes_count += 1
+        number += 1
+
+
+def prime(number):
+    sum_of_divisors = 0
+    for divisor in range(1, number+1):
+        if number % divisor == 0:
+            sum_of_divisors += 1
+    if sum_of_divisors <= 2:
+            return True
+",22,authentic,print_primes,1,good,,,good,,,good,,,,
+,,,,prime,11,medium,confusing,not respecting type,bad,confusing,not respecting type,bad,confusing,not respecting type,personal opinions -- severity,personal opinions -- severity
+,,,,n,1,good,,,good,,,good,,,,
+,,,,number,2,medium,uninformative,vague,good,,,medium,uninformative,vague,personal opinions -- naming standards,
+,,,,primes_count,3,good,,,good,,,good,,,,
+,,,,number,11,good,,,good,,,medium,uninformative,vague,,less relevant
+,,,,sum_of_divisors,12,medium,overly informative,overly specific,bad,confusing,contradicting meaning,bad,confusing,contradicting meaning,oversight H1,oversight H1
+,,,,divisor,13,good,,,good,,,good,,,,
+369,"def count_a(text):
+    l = len(text) 
+    count_a = 0
+    for i in range(l):
+        if text[i] == ""a"" or text[i] == ""A"": 
+            count_a = count_a + 1
+    return(count_a)",25,authentic,count_a,1,good,,,good,,,good,,,,
+,,,,text,1,good,,,good,,,good,,,,
+,,,,l,2,bad,syntactic,easy to confuse,bad,syntactic,easy to confuse,bad,syntactic,easy to confuse,,
+,,,,count_a,3,bad,syntactic,shadowing other,bad,syntactic,shadowing builtin,bad,syntactic,shadowing other,oversight H2,
+,,,,i,4,good,,,bad,confusing,contradicting common use,good,,,oversight H1,
+103,"def count_a(text):
+    a=0
+    u_A=""A""
+    l_a=""a""
+    for x in range(len(text)):
+        if text[x] == u_A:
+            a+=1
+        elif text[x] == l_a:
+            a+=1
+        else:
+            a=a
+    return a",25,authentic,count_a,1,good,,,good,,,good,,,,
+,,,,text,1,good,,,good,,,good,,,,
+,,,,a,2,medium,uninformative,single letter systematic,bad,uninformative,single letter systematic,bad,uninformative,single letter arbitrary,personal opinions -- severity,multiple possible sub-reasons
+,,,,u_A,3,medium,uninformative,unnecessary abbreviation,bad,uninformative,unnecessary abbreviation,bad,uninformative,unnecessary abbreviation,personal opinions -- severity,personal opinions -- severity
+,,,,l_a,4,medium,uninformative,unnecessary abbreviation,bad,uninformative,unnecessary abbreviation,bad,syntactic,easy to confuse,personal opinions -- severity,multiple possible sub-reasons
+,,,,x,5,medium,confusing,contradicting common use,medium,confusing,contradicting common use,medium,uninformative,single letter systematic,,multiple possible sub-reasons
+377,"def print_first_letters(text):
+    fn = """"
+    x = text.split()
+    for lol in x:
+        fn += lol[0] + "" ""
+    print (fn)",27,authentic,print_first_letters,1,good,,,good,,,good,,,,
+,,,,text,1,good,,,good,,,good,,,,
+,,,,fn,2,bad,uninformative,unnecessary abbreviation,bad,uninformative,nonsense,bad,uninformative,unnecessary abbreviation,multiple possible sub-reasons,
+,,,,x,3,bad,uninformative,single letter arbitrary,bad,confusing,inconsistent,bad,uninformative,single letter arbitrary,fuzziness of taxonomy,
+,,,,lol,4,bad,uninformative,nonsense,bad,uninformative,nonsense,bad,uninformative,nonsense,,
+351,"def zip_strings(text1, text2):
+    zip1_celkem=""""
+    zip2_celkem=""""
+    minimalni_delka=min(len(text1),len(text2))
+    for i in range(minimalni_delka):
+        zip1 = text1[i]+text2[i]
+        zip1_celkem += zip1
+    if len(text1) == minimalni_delka:
+        for j in range(minimalni_delka,len(text2)):
+            zip2 = text2[j]
+            zip2_celkem += zip2
+    else:
+        for j in range(minimalni_delka,len(text1)):
+            zip2 = text1[j]
+            zip2_celkem += zip2
+    zip = zip1_celkem + zip2_celkem
+    return zip",28,authentic,zip_strings,1,good,,,good,,,good,,,,
+,,,,text1,1,good,,,good,,,medium,uninformative,vague,,less relevant
+,,,,text2,1,good,,,good,,,medium,uninformative,vague,,less relevant
+,,,,zip1_celkem,2,bad,confusing,false analogy,medium,language,not in English,bad,language,not in English,multiple possible sub-reasons,multiple possible sub-reasons
+,,,,zip2_celkem,3,bad,confusing,false analogy,medium,language,not in English,bad,language,not in English,multiple possible sub-reasons,multiple possible sub-reasons
+,,,,minimalni_delka,4,medium,language,not in English,medium,language,not in English,bad,language,not in English,,personal opinions -- severity
+,,,,i,5,good,,,good,,,good,,,,
+,,,,zip1,6,medium,confusing,false analogy,good,,,medium,uninformative,vague,personal opinions -- naming standards,multiple possible sub-reasons
+,,,,j,9,good,,,good,,,good,,,,
+,,,,zip2,10,medium,confusing,false analogy,good,,,bad,confusing,false analogy,personal opinions -- naming standards,personal opinions -- severity
+,,,,zip,16,medium,syntactic,shadowing builtin,good,,,bad,syntactic,shadowing builtin,oversight H2,personal opinions -- severity
+356,"def get_unique_values(mylist):
+    newTable=[]
+    for i in mylist:
+        NotThere=True
+        for x in newTable:
+            if i==x:
+                NotThere=False
+        if NotThere:
+            newTable.append(i)
+    return newTable",29,authentic,get_unique_values,1,good,,,good,,,good,,,,
+,,,,mylist,1,medium,overly informative,overly specific,medium,uninformative,vague,medium,uninformative,vague,multiple possible sub-reasons,multiple possible sub-reasons
+,,,,newTable,2,bad,confusing,contradicting meaning,bad,confusing,inconsistent,medium,syntactic,breaks naming conventions,multiple possible sub-reasons,multiple possible sub-reasons
+,,,,i,3,bad,confusing,contradicting common use,bad,confusing,contradicting common use,bad,confusing,contradicting common use,,
+,,,,NotThere,4,bad,confusing,negated boolean,bad,confusing,negated boolean,bad,confusing,negated boolean,,
+,,,,x,5,bad,uninformative,single letter arbitrary,medium,uninformative,single letter arbitrary,bad,uninformative,single letter arbitrary,personal opinions -- severity,
+124,"def get_most_common_value(mylist):
+    dict_common = dict()
+    for num in mylist:
+        dict_common[num] = dict_common.get(num, 0) + 1
+        #max_value = max(dict_common.keys(), key=dict_common.get)
+    #mylist = set(mylist.items)
+    maximum = 0
+    for key_num in dict_common.keys():
+        if dict_common[key_num] > maximum:
+            maximum = dict_common[key_num]
+            key_value = key_num
+    return key_value",30,authentic,get_most_common_value,1,good,,,good,,,good,,,,
+,,,,mylist,1,medium,overly informative,overly specific,medium,uninformative,vague,bad,uninformative,vague,multiple possible sub-reasons,multiple possible sub-reasons
+,,,,dict_common,2,bad,uninformative,vague,medium,confusing,contradicting meaning,bad,uninformative,vague,multiple possible sub-reasons,
+,,,,num,3,good,,,medium,uninformative,unnecessary abbreviation,medium,confusing,contradicting meaning,fuzziness of taxonomy,oversight H1
+,,,,maximum,7,medium,uninformative,vague,good,,,good,,,personal opinions -- naming standards,personal opinions -- naming standards
+,,,,key_num,8,medium,overly informative,overly specific,medium,overly informative,overly specific,medium,confusing,contradicting meaning,,multiple possible sub-reasons
+,,,,key_value,11,bad,confusing,false analogy,bad,confusing,inconsistent,bad,confusing,contradicting meaning,multiple possible sub-reasons,multiple possible sub-reasons
+129,"def find_longest_word(words_list):
+    schlong = 0
+    longest = ""slovo""
+    for word in words_list:
+        if len(word) > schlong:
+            schlong = len(word)
+            longest = word
+    return longest",31,authentic,find_longest_word,1,good,,,good,,,good,,,,
+,,,,words_list,1,medium,overly informative,including type,good,,,medium,overly informative,including type,oversight H2,
+,,,,schlong,2,bad,uninformative,nonsense,bad,uninformative,nonsense,bad,uninformative,nonsense,,
+,,,,longest,3,medium,uninformative,vague,good,,,good,,,personal opinions -- naming standards,personal opinions -- naming standards
+,,,,word,4,good,,,good,,,good,,,,
+131,"def find_longest_word(words_list):
+    charcount = 0
+    a = []
+    for word in words_list:
+        for char in word:
+            charcount += 1
+        a.append(charcount)
+        charcount = 0
+    bn = max(a)
+    bw = a.index(bn)
+    return words_list[bw]",31,authentic,find_longest_word,1,good,,,good,,,good,,,,
+,,,,words_list,1,medium,overly informative,including type,good,,,medium,overly informative,including type,oversight H2,
+,,,,charcount,2,medium,uninformative,vague,medium,syntactic,breaks naming conventions,medium,syntactic,breaks naming conventions,multiple possible sub-reasons,multiple possible sub-reasons
+,,,,a,3,bad,uninformative,single letter arbitrary,bad,uninformative,single letter arbitrary,bad,uninformative,single letter arbitrary,,
+,,,,word,4,good,,,good,,,good,,,,
+,,,,char,5,good,,,good,,,good,,,,
+,,,,bn,9,bad,uninformative,unnecessary abbreviation,bad,uninformative,unnecessary abbreviation,bad,uninformative,unnecessary abbreviation,,
+,,,,bw,10,bad,uninformative,unnecessary abbreviation,bad,uninformative,unnecessary abbreviation,bad,uninformative,unnecessary abbreviation,,
+147,"def print_bigN(n):
+    for radek in range (n):
+        for sloupec in range (n+2):
+            tisk="" ""
+            if sloupec==0 or sloupec==n+1:
+                tisk=""|""
+            if sloupec==radek+1:
+                tisk=""\\""
+            print(tisk, end="""")
+        print()
+            
+",40,authentic,print_bigN,1,medium,syntactic,breaks naming conventions,medium,syntactic,breaks naming conventions,good,,,,wrong
+,,,,n,1,medium,uninformative,vague,good,,,good,,,personal opinions -- naming standards,personal opinions -- naming standards
+,,,,radek,2,medium,language,not in English,medium,language,not in English,bad,language,not in English,,personal opinions -- severity
+,,,,sloupec,3,medium,language,not in English,medium,language,not in English,bad,language,not in English,,personal opinions -- severity
+,,,,tisk,4,medium,language,not in English,medium,uninformative,vague,bad,language,not in English,multiple possible sub-reasons,personal opinions -- severity
+151,"def make_fancy(text, n): 
+    text = list(text) 
+    x = 0 
+    space = "" "" 
+    for leter in text: 
+        printingStr = x * "" "" 
+        printingStr += (leter+"" "") * n 
+        print(printingStr)
+        x+=1",44,manual typo,make_fancy,1,medium,uninformative,vague,good,,,good,,,personal opinions -- naming standards,personal opinions -- naming standards
+,,,,text,1,good,,,good,,,good,,,,
+,,,,n,1,medium,uninformative,vague,good,,,good,,,personal opinions -- naming standards,personal opinions -- naming standards
+,,,,x,3,good,,,bad,uninformative,single letter arbitrary,bad,uninformative,single letter arbitrary,oversight H1,oversight H1
+,,,,space,4,good,,,good,,,good,,,,
+,,,,leter,5,medium,language,misspelled,medium,language,misspelled,bad,language,misspelled,,personal opinions -- severity
+,,,,printingStr,6,medium,overly informative,including type,medium,syntactic,breaks naming conventions,bad,syntactic,breaks naming conventions,multiple possible sub-reasons,multiple possible sub-reasons
+359,"def not_prime(rest):
+    for i in range(2,rest):
+        if rest%i==0:
+            return True
+    
+    return False
+    
+    
+def step(num):
+    for i in range(2,num):
+        if (num%i)==0:
+            return i,int(num/i)
+
+
+
+
+def factorize(n):
+    primes = []
+    rest = n
+    prime = 0
+    while rest<=n:
+        
+        if not_prime(rest):
+            prime,rest = step(rest)
+            primes.append(prime)
+        else:
+            primes.append(rest)
+            break
+    print(n,""="","" * "".join(map(str,primes)))",69,authentic,not_prime,1,bad,confusing,negated boolean,bad,confusing,not respecting type,bad,confusing,negated boolean,multiple possible sub-reasons,
+,,,,step,9,medium,uninformative,vague,bad,confusing,not respecting type,bad,uninformative,vague,multiple possible sub-reasons,personal opinions -- severity
+,,,,factorize,17,good,,,good,,,good,,,,
+,,,,rest,1,medium,uninformative,vague,medium,uninformative,vague,medium,uninformative,vague,,
+,,,,i,2,good,,,good,,,good,,,,
+,,,,num,9,good,,,medium,uninformative,unnecessary abbreviation,good,,,fuzziness of taxonomy,
+,,,,i,10,good,,,good,,,good,,,,
+,,,,n,17,good,,,good,,,good,,,,
+,,,,primes,18,good,,,good,,,bad,confusing,contradicting meaning,,wrong
+,,,,rest,19,medium,uninformative,vague,medium,uninformative,vague,medium,uninformative,vague,,
+,,,,prime,20,good,,,good,,,bad,confusing,contradicting meaning,,wrong
+173,"def myFunc(e):
+    return len(e)
+
+def line(w):
+    alist = list(w)
+    alist.sort(reverse=True, key = myFunc )
+    k = len(alist[0])
+    for i in range(k+2):
+        print(""+"", end='')
+    print()
+    
+def print_big_frame(w):
+    alist = list(w)
+    alist.sort(reverse=True, key = myFunc )
+    k = len(alist[0])
+    line(w)
+    for i in w:
+        print(""+""+i, end="""")
+        print("" ""*(k-len(i)), end="""")
+        print(""+"")
+    line(w)",72,authentic,myFunc,1,bad,uninformative,vague,bad,uninformative,vague,bad,uninformative,nonsense,,less relevant
+,,,,line,4,medium,confusing,not respecting type,medium,confusing,not respecting type,bad,confusing,not respecting type,,personal opinions -- severity
+,,,,print_big_frame,12,good,,,good,,,good,,,,
+,,,,e,1,bad,uninformative,single letter arbitrary,bad,uninformative,single letter arbitrary,medium,uninformative,single letter systematic,,less relevant
+,,,,w,4,bad,uninformative,single letter systematic,bad,uninformative,single letter arbitrary,medium,uninformative,single letter systematic,multiple possible sub-reasons,multiple possible sub-reasons
+,,,,alist,5,good,,,medium,uninformative,vague,bad,uninformative,vague,personal opinions -- naming standards,personal opinions -- naming standards
+,,,,k,7,medium,uninformative,single letter arbitrary,good,,,bad,uninformative,single letter arbitrary,oversight H2,personal opinions -- severity
+,,,,i,8,good,,,good,,,good,,,,
+,,,,w,12,bad,uninformative,single letter systematic,bad,uninformative,single letter systematic,medium,uninformative,single letter systematic,,personal opinions -- severity
+,,,,alist,13,good,,,medium,uninformative,vague,bad,uninformative,vague,personal opinions -- naming standards,personal opinions -- naming standards
+,,,,k,15,medium,uninformative,single letter arbitrary,good,,,bad,uninformative,single letter arbitrary,oversight H2,personal opinions -- severity
+,,,,i,17,good,,,bad,confusing,contradicting common use,bad,confusing,contradicting common use,oversight H1,oversight H1
+178,"def print_nested_squares(n):
+    def make_upper_square(list, char):
+        length = len(list)
+        for i in range(length):
+            list[i] = char + list[i] + char
+        list.append(char * (length + 2))
+        list.insert(0, char * (length + 2))
+    
+    matrix = [ '#' ]
+
+    for i in range(n - 1):
+        make_upper_square(matrix, ' ')
+        make_upper_square(matrix, '#')
+
+    for line in matrix:
+        print(line)",74,authentic,print_nested_squares,1,good,,,good,,,good,,,,
+,,,,n,1,good,,,good,,,good,,,,
+,,,,make_upper_square,2,medium,confusing,contradicting meaning,good,,,bad,confusing,contradicting meaning,personal opinions -- naming standards,personal opinions -- severity
+,,,,matrix,9,medium,uninformative,vague,good,,,good,,,personal opinions -- naming standards,personal opinions -- naming standards
+,,,,i,11,good,,,good,,,good,,,,
+,,,,line,15,good,,,good,,,good,,,,
+,,,,list,2,medium,syntactic,shadowing builtin,bad,syntactic,shadowing builtin,bad,syntactic,shadowing builtin,personal opinions -- severity,personal opinions -- severity
+,,,,char,2,good,,,good,,,good,,,,
+,,,,length,3,good,,,good,,,good,,,,
+,,,,i,4,good,,,good,,,good,,,,
+187,"def print_arrow(n):
+    change = n
+    reverse = n-2
+    for i in range(n):
+        for j in range(n):
+            if i < n//2:
+                c = '.'
+                if j==change//2:      # zde opravit
+                    c = '*'
+                print(c, end="""")
+            elif i==n//2:
+                print(""*"",end="""")
+            else:
+                c = '.'
+                if j==reverse:
+                    c = ""*""
+                print(c,end="""")
+        if i > n//2:
+            reverse-=1
+        change+=2
+        print()",78,authentic,print_arrow,1,good,,,good,,,good,,,,
+,,,,n,1,medium,uninformative,vague,good,,,good,,,personal opinions -- naming standards,personal opinions -- naming standards
+,,,,change,2,bad,confusing,not respecting type,medium,uninformative,vague,bad,uninformative,vague,multiple possible sub-reasons,multiple possible sub-reasons
+,,,,reverse,3,bad,confusing,not respecting type,medium,uninformative,vague,bad,uninformative,vague,multiple possible sub-reasons,multiple possible sub-reasons
+,,,,i,4,good,,,good,,,good,,,,
+,,,,j,5,good,,,good,,,good,,,,
+,,,,c,7,medium,uninformative,single letter systematic,medium,uninformative,single letter systematic,medium,uninformative,single letter systematic,,
+191,"def bigT(n):
+    for row_num in range(n):
+        for col_num in range(n):
+            if row_num == 0 or col_num == n//2:
+                print(""#"", end="""")
+            else:
+                print("" "", end = """")
+        print()",79,authentic,bigT,1,medium,syntactic,breaks naming conventions,medium,confusing,not respecting type,medium,syntactic,breaks naming conventions,multiple possible sub-reasons,
+,,,,n,1,good,,,good,,,good,,,,
+,,,,row_num,2,medium,overly informative,including type,medium,overly informative,including type,good,,,,less relevant
+,,,,col_num,3,medium,overly informative,including type,medium,overly informative,including type,good,,,,less relevant
+366,"def count_small_numbers(numbers, k):
+    maly = 0
+    for numbers in numbers:
+        if numbers<k:
+            maly += 1
+    return maly",106,authentic,count_small_numbers,1,good,,,good,,,good,,,,
+,,,,numbers,1,medium,syntactic,shadowing other,good,,,bad,syntactic,shadowing other,oversight H2,personal opinions -- severity
+,,,,k,1,good,,,good,,,medium,uninformative,single letter arbitrary,,personal opinions -- naming standards
+,,,,maly,2,bad,language,not in English,medium,language,not in English,bad,language,not in English,personal opinions -- severity,
+330,"def print_letter_frequencies(text):
+    abc={} 
+    u = """"
+    for letter in text:
+        if letter in abc : 
+            abc[letter]=abc[letter]+1
+        else:
+            abc[letter]=1
+    for i in text:
+        if i not in u:
+            u += i
+    for i in u:
+        print(i,abc[i])",124,authentic,print_letter_frequencies,1,good,,,good,,,good,,,,
+,,,,text,1,good,,,good,,,good,,,,
+,,,,abc,2,bad,uninformative,nonsense,bad,uninformative,nonsense,bad,uninformative,nonsense,,
+,,,,u,3,bad,uninformative,single letter arbitrary,bad,uninformative,single letter arbitrary,bad,uninformative,single letter systematic,,multiple possible sub-reasons
+,,,,letter,4,good,,,good,,,good,,,,
+,,,,i,9,bad,confusing,contradicting common use,bad,confusing,contradicting common use,bad,confusing,contradicting common use,,
+333,"def print_letter_frequencies(text):
+    cetnost = {}
+    for letter in text:
+        if letter not in cetnost:
+            cetnost[letter] = 1
+
+        else:
+            cetnost[letter] += 1
+    vypsano = """"
+    for letter in text:
+        if not letter in vypsano:
+            print(letter,cetnost[letter])
+            vypsano+=letter",124,authentic,print_letter_frequencies,1,good,,,good,,,good,,,,
+,,,,text,1,good,,,good,,,good,,,,
+,,,,cetnost,2,medium,confusing,not respecting count,medium,language,not in English,bad,language,not in English,multiple possible sub-reasons,multiple possible sub-reasons
+,,,,letter,3,good,,,good,,,good,,,,
+,,,,vypsano,9,medium,language,not in English,medium,language,not in English,bad,language,not in English,,personal opinions -- severity
+275,"def print_letter_frequencies(text):
+    # inicializace slovníku pro počítání výskytů
+    count = {}
+    
+    # projití celého řetězce a naplnění slovníku
+    for char in text:
+        if char not in count:
+            count[char] = 0 
+        count[char] += 1
+    
+    # vypsání počtu výskytů jednotlivých znaků v pořadí jako v textu
+    for char in text:
+        if char in count:
+            print(char + "" "" + str(count[char]))
+            del count[char]",124,authentic,print_letter_frequencies,1,good,,,good,,,good,,,,
+,,,,text,1,good,,,good,,,good,,,,
+,,,,count,3,bad,confusing,not respecting count,medium,confusing,not respecting count,medium,confusing,not respecting count,personal opinions -- severity,personal opinions -- severity
+,,,,char,6,good,,,good,,,good,,,,
+286,"price = {""luk"": 5, ""srp"": 3, ""kosa"": 8, ""kladivo"": 4, ""cep"": 2, ""pila"": 6}
+
+def get_total_price(tools):
+    ourPrice = 0
+    for i in tools:
+        if i in price.keys():
+            ourPrice += price[i]
+        else:
+            print(""Nelze nakoupit"")
+            return
+    print(""Celkem"", ourPrice)",126,authentic,get_total_price,3,good,,,good,,,good,,,,
+,,,,price,1,medium,confusing,not respecting count,good,,,medium,confusing,not respecting count,oversight H2,
+,,,,tools,3,good,,,good,,,good,,,,
+,,,,ourPrice,4,medium,overly informative,overly specific,medium,syntactic,breaks naming conventions,bad,syntactic,breaks naming conventions,multiple possible sub-reasons,multiple possible sub-reasons
+,,,,i,5,bad,confusing,contradicting common use,bad,confusing,contradicting common use,bad,confusing,contradicting common use,,
+288,"def get_training_time(activities, lengths):
+    lenght_total = 0
+    for a in activities:
+        if a in lengths:
+            lenght_total += lengths[a]
+    return lenght_total",127,authentic,get_training_time,1,good,,,good,,,good,,,,
+,,,,activities,1,good,,,good,,,good,,,,
+,,,,lengths,1,good,,,good,,,good,,,,
+,,,,lenght_total,2,medium,language,misspelled,medium,language,misspelled,bad,language,misspelled,,personal opinions -- severity
+,,,,a,3,medium,uninformative,single letter systematic,medium,uninformative,single letter systematic,bad,uninformative,single letter systematic,,personal opinions -- severity
+291,"def check(transactions):
+    buffer=[]
+    chyba = 0
+    transactions = transactions.split()    
+    for index, obchod in enumerate(transactions):
+        if obchod.count(""+""):
+            buffer += obchod[1]
+        elif obchod.count(""-""):
+            if buffer.count(obchod[1]) == 0:
+                print(""Chyba:"",obchod[1])
+                chyba +=1
+                break 
+            elif buffer.count(obchod[1]) == 1:
+                buffer.remove(obchod[1])
+    if chyba == 0:
+        print(""OK"")",128,authentic,check,1,medium,uninformative,vague,good,,,medium,uninformative,vague,personal opinions -- naming standards,
+,,,,transactions,1,good,,,good,,,good,,,,
+,,,,buffer,2,bad,confusing,contradicting meaning,medium,uninformative,vague,medium,uninformative,vague,multiple possible sub-reasons,multiple possible sub-reasons
+,,,,chyba,3,medium,language,not in English,medium,language,not in English,bad,language,not in English,,personal opinions -- severity
+,,,,index,5,good,,,good,,,good,,,,
+,,,,obchod,5,medium,confusing,contradicting common use,medium,language,not in English,bad,language,not in English,multiple possible sub-reasons,multiple possible sub-reasons
